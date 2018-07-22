@@ -1,11 +1,11 @@
-# Midwest FurFest Countdown Bot
-This is a bot that I made, it counts down the days until MFF in the form of a picture.
+# Convention Countdown Bot
+This bot will count down the days every day with a picture for a convention.
 
 # Language
 The bot was coded in Node.js
 
 # Where to find my bot?
-You can find my bot at
+The bot that I am running with the code base is here,
 
 https://telegram.me/FurFestBot
 
@@ -18,9 +18,13 @@ sudo apt install graphicsmagick
 sudo apt install mongodb
 ```
 
-You need two Telegram bot API keys, one for the main bot and another for the admin bot.
+Make a folder in the main directory with the short abbriviation of the con. Make a folder in there called pics, and countdown.
 
-To upload photos use the upload.js script. The options for it are documented below. You will also need to use the DBNAME environment variable. And if needed the HOST and PORT variables.
+Download a font you want to use for the bot and put it in the same folder.
+
+And finally copy convention.example.js into the folder and rename it to convention.js
+
+Edit convention.js with all your custom options.
 
 Run your bot behind a https nginx reverse proxy with a path of /bot(token). If you don't know what this is [read this](https://www.nginx.com/resources/admin-guide/reverse-proxy/)
 
@@ -30,25 +34,17 @@ Finally add cron.js to the crontab to send the daily picture.
 
 If you want to run this bot on windows then you need to add graphicsmagick to your path and install mongodb.
 
-### To setup the bot you need to edit 2 JS files and some environment variables.
-
-* Edit src/messages.js - This file contains the messages for the bot and the owner chat ID. Edit this with what you want to change.
-
-* Edit src/days.js - Edit the date here to change the day it counts down to.
-
 ## Environment Variables
 
 TYPE: "production" or "test"
 
 * production: Runs the bot in normal mode.
 
-* test: Runs the bot in testing mode, pass a telegram bot api key for testing.
+* test: Runs the bot in testing mode, when in this mode pass an api key from another bot. And make sure you use a diffirent database for testing.
 
 TOKEN: Telegram bot API key for normal bot.
 
-ADMIN: Telegram bot API key for admin bot.
-
-CON: Name for the convention ex: "MFF"
+CON: Name for the convention ex: "MFF". Make sure this matches the folder name exactly
 
 HOST: IP for the mongodb database. (Default: localhost)
 
@@ -76,6 +72,8 @@ WEBHOOK: URL for the webhook to your server. ex: example.com
 --host hostname for mongodb
 
 --port port for mongodb
+
+--con convention name
 
 
 # Example Picture
