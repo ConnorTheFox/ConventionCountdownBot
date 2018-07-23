@@ -1,4 +1,6 @@
 const TelegramBot = require('node-telegram-bot-api')
+const process = require('process')
+const port = process.env.BOTPORT
 
 const token = process.env.TOKEN
 const mode = process.env.TYPE
@@ -12,7 +14,7 @@ if (mode === 'test') {
 if (mode === 'production') {
     bot = new TelegramBot(token, {
         webHook: {
-            port: 8000
+            port: port
         }
     })
     bot.setWebHook(`https://${webhook}/bot${token}`)
