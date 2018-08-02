@@ -71,7 +71,7 @@ const genImage = function () {
 				.fill(textColor)
 				.drawText(textW, textH, day)
 				.font(path.join(`${con}/${conInfo.font}`))
-				.fontSize(width / 4.5) //Smaller number makes it larger
+				.fontSize(width / conInfo.fontSize) //Smaller number makes it larger
 				.write(path.join(`${con}/countdown/` + day.toString() + '.jpg'), (err) => {
 					if (!err) {
 						let file = fs.readFile(path.join(`${con}/countdown/` + day + '.jpg'), (err, data) => {
@@ -80,7 +80,8 @@ const genImage = function () {
 								db.find({ photo: photo }, 'credit').then(credit => {
 									res({
 										buffer: data,
-										credit: credit[0].url
+										name: credit[0].name,
+										url: credit[0].url
 									})
 								})
 							} else {

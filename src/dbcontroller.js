@@ -2,7 +2,7 @@ const empty = require('is-empty')
 const mongoose = require('mongoose')
 const process = require('process')
 const dbString = `${process.env.HOST || 'localhost'}:${process.env.PORT || '27017'}/${process.env.DBNAME}`
-mongoose.connect(`mongodb://${dbString}`)
+mongoose.connect(`mongodb://${dbString}`, { useNewUrlParser: true })
 
 let userSchema = new mongoose.Schema({
 	name: String,

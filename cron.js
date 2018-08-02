@@ -17,13 +17,13 @@ async function sendDaily() {
 	} catch (e) {
 		console.log(e)
 	}
-	let captionString = `${returns.createCaption(day)} \n\n📸: ${returned.credit}`
+	let captionString = `${returns.createCaption(day)} \n\n📸: [${returned.name}](${returned.url})`
 	let users = await db.find({}, 'users')
 	debug('Got photo')
 	let photoId
 	for (let x in users) {
 		try {
-			let sent = await bot.sendPhoto(users[x].chatId, (photoId || returned.buffer), { caption: captionString }, { contentType: 'image/jpeg' })
+			let sent = await bot.sendPhoto(users[x].chatId, (photoId || returned.buffer), { caption: captionString, parse_mode: 'Markdown' }, { contentType: 'image/jpeg' })
 			photoId = sent.photo[(sent.photo.length - 1)].file_id
 			returns.generateLog((sent.chat.first_name || sent.chat.title), null, 'daily')
 			debug('Sent image')
@@ -38,7 +38,7 @@ async function sendDaily() {
 
 
 let day = days.until()
-if (day >= 1 && day <= 120) {
+if (day >= 1) {
 	online('https://api.telegram.org').then(status => {
 		if (status) {
 			sendDaily()
