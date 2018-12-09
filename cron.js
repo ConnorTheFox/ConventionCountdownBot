@@ -8,7 +8,7 @@ const days = require('./src/days.js')
 const bot = require('./src/bots.js').bot
 const Twitter = require('twit')
 const gm = require('gm')
-const isTwitter = process.env.TWITTER
+const isTwitter = parseInt(process.env.TWITTER)
 
 let twitter
 if (isTwitter) {
